@@ -42,10 +42,24 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
+    'shirt_designer.apps.ShirtDesignerConfig',
 
     'ckeditor',
     'rest_framework',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    "PAGE_SIZE": 2,
+
+}
+
 
 
 AUTH_USER_MODEL = 'account.Account'
@@ -137,6 +151,11 @@ USE_TZ = True
 CART_SESSION_ID = 'cart'
 
 STATIC_URL = '/static/'
-
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'media'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
